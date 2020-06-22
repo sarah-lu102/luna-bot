@@ -3,9 +3,11 @@ const { prefix, token } = require('./config.json');
 const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg');
 const client = new Discord.Client();
+const PORT = process.env.PORT || 5000;
+
+http.createServer(onRequest).listen(process.env.PORT || 8000);
 
 const serverList = new Map();
-
 
 client.once('ready', () => {
     console.log('Ready!');
