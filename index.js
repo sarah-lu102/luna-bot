@@ -14,7 +14,8 @@ client.once('ready', () => {
 client.on('message', message => {
     console.log('"' + message.content + '"' + ": sent by " + message.author.username);
 
-    if (message.content.startsWith(`${prefix}kick`)) {
+    //if (message.content.startsWith(`${prefix}kick`)) {
+    if (message.content.startsWith(`${process.env.PREFIX}kick`)) {
         let member = message.mentions.members.first();
         member.kick().then((member) => {
             message.channel.send(":wave: " + member.displayName + " has been kicked"); //sends an emoji
@@ -29,13 +30,16 @@ client.on('message', async message => {
 
     const serverQueue = serverList.get(message.guild.id);
 
-    if (message.content.startsWith(`${prefix}play`)) {
+    // if (message.content.startsWith(`${prefix}play`)) {
+    if (message.content.startsWith(`${process.env.PREFIX}play`)) {
         execute(message, serverQueue);
         return;
-    } else if (message.content.startsWith(`${prefix}skip`)) {
+    // } else if (message.content.startsWith(`${prefix}skip`)) {
+    } else if (message.content.startsWith(`${process.env.PREFIX}skip`)) {
         skip(message, serverQueue);
         return;
-    } else if (message.content.startsWith(`${prefix}stop`)) {
+    // } else if (message.content.startsWith(`${prefix}stop`)) {
+    } else if (message.content.startsWith(`${process.env.PREFIX}stop`)) {
         stop(message, serverQueue);
         return;
     } else {
@@ -133,4 +137,5 @@ function play(guild, song) {
     serverQueue.textChannel.send(`Now playing: **${song.title}**`);
 }
 
-client.login(token);
+//client.login(token);
+client.login(process.env.BOT-TOKEN);
