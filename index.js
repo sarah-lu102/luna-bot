@@ -26,7 +26,7 @@ client.on('message', message => {
 //reading messages
 client.on('message', async message => {
     if (message.author.bot) return; //ignore if message is from the bot
-    if (!message.content.startsWith(prefix)) return; //ignore if message doesn't contain prefix
+    if (!message.content.startsWith(process.env.PREFIX)) return; //ignore if message doesn't contain prefix
 
     const serverQueue = serverList.get(message.guild.id);
 
