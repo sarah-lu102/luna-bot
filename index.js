@@ -4,9 +4,8 @@ const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg');
 const client = new Discord.Client();
 const http = require('http');
+const opus = require("@discordjs/opus");
 const PORT = process.env.PORT || 5000;
-
-// http.createServer().listen(PORT);
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
