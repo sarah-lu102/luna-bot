@@ -7,6 +7,7 @@ const http = require('http');
 const opus = require("@discordjs/opus");
 const PORT = process.env.PORT || 5000;
 
+//for cron job to ping
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.write('Hello World!');
@@ -21,8 +22,6 @@ client.once('ready', () => {
 
 client.on('message', message => {
     console.log('"' + message.content + '"' + ": sent by " + message.author.username);
-
-    //if (message.content.startsWith(`${prefix}kick`)) {
     if (message.content.startsWith(`${process.env.PREFIX}kick`)) {
         let member = message.mentions.members.first();
         member.kick().then((member) => {
@@ -38,15 +37,12 @@ client.on('message', async message => {
 
     const serverQueue = serverList.get(message.guild.id);
 
-    // if (message.content.startsWith(`${prefix}play`)) {
     if (message.content.startsWith(`${process.env.PREFIX}play`)) {
         execute(message, serverQueue);
         return;
-    // } else if (message.content.startsWith(`${prefix}skip`)) {
     } else if (message.content.startsWith(`${process.env.PREFIX}skip`)) {
         skip(message, serverQueue);
         return;
-    // } else if (message.content.startsWith(`${prefix}stop`)) {
     } else if (message.content.startsWith(`${process.env.PREFIX}stop`)) {
         stop(message, serverQueue);
         return;
@@ -145,5 +141,4 @@ function play(guild, song) {
     serverQueue.textChannel.send(`Now playing: **${song.title}**`);
 }
 
-//client.login(token);
 client.login(process.env.BOT_TOKEN);
